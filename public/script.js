@@ -312,12 +312,18 @@ window.addEventListener("resize", () => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    btn.textContent = "✅ Lembrete criado!";
+    btn.querySelector(".reminder-ico").textContent  = "✅";
+    btn.querySelector(".reminder-txt strong").textContent = "Lembrete criado!";
+    btn.querySelector(".reminder-txt small").textContent  = "Verifique o seu calendário 🎉";
+    btn.querySelector(".reminder-arrow").textContent = "";
     btn.classList.add("ok");
     setTimeout(() => {
-      btn.textContent = "📅 Salvar lembrete no celular";
+      btn.querySelector(".reminder-ico").textContent  = "📅";
+      btn.querySelector(".reminder-txt strong").textContent = "Salvar na agenda";
+      btn.querySelector(".reminder-txt small").textContent  = "Cria um lembrete automático no seu celular";
+      btn.querySelector(".reminder-arrow").textContent = "→";
       btn.classList.remove("ok");
-    }, 3000);
+    }, 3500);
   });
 })();
 

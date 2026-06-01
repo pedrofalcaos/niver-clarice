@@ -231,33 +231,57 @@ a, button, input, select, textarea, label, [role="button"] {
 .detail-txt .v em { color: var(--ink); font-style: normal; font-weight: 500; }
 .dash { height: 0; border-top: 2px dashed #f0c6d4; margin: 2px 0; }
 .maps-link {
-  margin-top: 6px; display: block; color: #fff; background: var(--bluey);
-  text-decoration: none; font-weight: 600; font-size: 14px;
-  padding: 10px 14px; border-radius: 12px; box-shadow: 0 4px 0 var(--bluey-dk);
-  transition: transform .15s, box-shadow .15s; text-align: center;
+  margin-top: 8px; display: block; color: #fff; background: var(--bluey);
+  text-decoration: none; font-weight: 700; font-size: 15px;
+  padding: 11px 14px; border-radius: 14px; box-shadow: 0 4px 0 var(--bluey-dk);
+  transition: transform .15s, box-shadow .15s;
+  text-align: center; white-space: nowrap;
 }
 .maps-link:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--bluey-dk); }
 .maps-link:active { transform: translateY(2px);  box-shadow: 0 2px 0 var(--bluey-dk); }
 
+/* ---------- LEMBRETE DESTAQUE ---------- */
+.reminder-wrap { padding: 0 2px; }
+
 .reminder-btn {
-  margin-top: 8px;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 14px;
   width: 100%;
-  background: linear-gradient(180deg, var(--pink), var(--pink-dk));
-  color: #fff;
   border: none;
-  border-radius: 12px;
-  padding: 10px 14px;
+  border-radius: 20px;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #f4799e 0%, #d8567f 100%);
+  color: #fff;
   font-family: "Fredoka", sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  text-align: center;
-  box-shadow: 0 4px 0 var(--pink-dk);
-  transition: transform .12s, box-shadow .12s;
+  box-shadow: 0 6px 0 #b03464, 0 10px 24px rgba(212,86,127,.35);
+  transition: transform .14s, box-shadow .14s, filter .2s;
+  animation: reminderPulse 2.6s ease-in-out infinite;
 }
-.reminder-btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--pink-dk); }
-.reminder-btn:active { transform: translateY(2px);  box-shadow: 0 2px 0 var(--pink-dk); }
-.reminder-btn.ok { background: linear-gradient(180deg,#6cbf6a,#4da84b); box-shadow: 0 4px 0 #3a8a38; }
+.reminder-btn:hover  {
+  filter: brightness(1.06);
+  transform: translateY(-3px);
+  box-shadow: 0 9px 0 #b03464, 0 14px 28px rgba(212,86,127,.4);
+  animation: none;
+}
+.reminder-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 #b03464; animation: none; }
+.reminder-btn.ok {
+  background: linear-gradient(135deg,#6cbf6a,#4da84b);
+  box-shadow: 0 6px 0 #3a8a38, 0 10px 24px rgba(77,168,75,.3);
+  animation: none;
+}
+
+@keyframes reminderPulse {
+  0%,100% { box-shadow: 0 6px 0 #b03464, 0 10px 24px rgba(212,86,127,.35); }
+  50%      { box-shadow: 0 6px 0 #b03464, 0 10px 32px rgba(212,86,127,.60); }
+}
+
+.reminder-ico  { font-size: 32px; flex: 0 0 auto; }
+.reminder-txt  { flex: 1; text-align: left; line-height: 1.3; }
+.reminder-txt strong { display: block; font-size: clamp(16px,4.5vw,20px); font-weight: 700; }
+.reminder-txt small  { font-size: clamp(11px,3vw,13px); opacity: .88; font-weight: 500; }
+.reminder-arrow { font-size: 22px; flex: 0 0 auto; opacity: .8; transition: transform .14s; }
+.reminder-btn:hover .reminder-arrow { transform: translateX(4px); }
 
 /* ---------- RSVP ---------- */
 .rsvp-sub  { text-align: center; margin: -6px 0 14px; color: var(--ink); opacity: .8; }
