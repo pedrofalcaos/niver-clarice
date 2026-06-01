@@ -162,6 +162,71 @@ a, button, input, select, textarea, label, [role="button"] {
   cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36'><ellipse cx='18' cy='24' rx='9' ry='8' fill='%23e8853a' stroke='%23ffffff' stroke-width='2'/><ellipse cx='9' cy='15' rx='4.5' ry='4' fill='%23e8853a' stroke='%23ffffff' stroke-width='1.5'/><ellipse cx='14.5' cy='11' rx='4' ry='3.5' fill='%23e8853a' stroke='%23ffffff' stroke-width='1.5'/><ellipse cx='21.5' cy='11' rx='4' ry='3.5' fill='%23e8853a' stroke='%23ffffff' stroke-width='1.5'/><ellipse cx='27' cy='15' rx='4.5' ry='4' fill='%23e8853a' stroke='%23ffffff' stroke-width='1.5'/></svg>") 18 18, pointer;
 }
 
+/* ---------- INTRO OVERLAY ---------- */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: linear-gradient(160deg, #7bc4f2 0%, #5aa9e6 45%, #1f3d7a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity .55s ease, transform .55s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.intro-overlay.saindo {
+  opacity: 0;
+  transform: scale(1.05);
+  pointer-events: none;
+}
+.intro-inner {
+  text-align: center;
+  padding: 24px;
+  animation: introEntrada .7s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes introEntrada {
+  from { opacity: 0; transform: translateY(40px) scale(.9); }
+}
+.intro-paw {
+  font-size: 80px;
+  display: block;
+  margin-bottom: 18px;
+  animation: introPaw 1.5s ease-in-out infinite;
+}
+@keyframes introPaw {
+  0%,100% { transform: scale(1)    rotate(-8deg); }
+  50%      { transform: scale(1.18) rotate(8deg);  }
+}
+.intro-title {
+  font-family: "Baloo 2", sans-serif;
+  font-weight: 800;
+  font-size: clamp(42px, 14vw, 86px);
+  color: #fff;
+  margin: 0 0 10px;
+  line-height: 1.05;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.18);
+}
+.intro-title span {
+  color: var(--pink);
+  -webkit-text-stroke: 3px var(--pink-dk);
+  paint-order: stroke fill;
+  filter: drop-shadow(0 4px 0 var(--pink-dk));
+}
+.intro-tap {
+  color: rgba(255,255,255,.92);
+  font-size: clamp(17px, 4.8vw, 24px);
+  font-weight: 600;
+  margin: 14px 0 0;
+  letter-spacing: .3px;
+  animation: tapPulse 1.5s ease-in-out infinite;
+}
+@keyframes tapPulse {
+  0%,100% { opacity: .88; transform: scale(1);    }
+  50%      { opacity: 1;   transform: scale(1.06); }
+}
+
 /* ---------- BOTÃO DE MÚSICA ---------- */
 .music-btn {
   position: fixed;

@@ -334,7 +334,6 @@ window.addEventListener("resize", () => {
   if (!audio || !btn) return;
 
   audio.volume = 0.35;
-  let started = false;
 
   function setPlaying(playing) {
     btn.textContent = playing ? "♫" : "♪";
@@ -343,23 +342,37 @@ window.addEventListener("resize", () => {
     btn.classList.toggle("playing", playing);
   }
 
-  function tryPlay() {
-    if (started) return;
-    started = true;
-    audio.play().then(() => setPlaying(true)).catch(() => { started = false; });
-  }
+  // Chamado pelo intro overlay (garante que o clique vem de interação real)
+  window._startMusic = function () {
+    audio.play().then(() => setPlaying(true)).catch(() => {});
+  };
 
   btn.addEventListener("click", (e) => {
     e.stopPropagation();
     if (audio.paused) {
-      audio.play().then(() => { started = true; setPlaying(true); }).catch(() => {});
+      audio.play().then(() => setPlaying(true)).catch(() => {});
     } else {
       audio.pause();
       setPlaying(false);
     }
   });
+})();
 
-  // Inicia automaticamente no primeiro toque/clique do usuário na página
-  document.addEventListener("click",      tryPlay, { once: true });
-  document.addEventListener("touchstart", tryPlay, { once: true });
+/* ---------- Tela de entrada ---------- */
+(function setupIntro() {
+  const overlay = document.getElementById("introOverlay");
+  if (!overlay) return;
+
+  function entrar(e) {
+    if (e && e.cancelable) e.preventDefault();
+    overlay.classList.add("saindo");
+    setTimeout(() => overlay.remove(), 600);
+    if (typeof window._startMusic === "function") window._startMusic();
+  }
+
+  overlay.addEventListener("click",      entrar);
+  overlay.addEventListener("touchstart", entrar, { passive: false });
+  overlay.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") entrar(e);
+  });
 })();
