@@ -1,5 +1,5 @@
 /* ===========================================================
-   Aniversário da Clarice — interações
+   Aniversário de Clarice — interações
    =========================================================== */
 
 // Data/hora da festa (horário de Brasília, UTC-3): 20/06/2026 às 15h
@@ -246,7 +246,7 @@ form?.addEventListener("submit", async (e) => {
     document.getElementById("modalTitle").textContent = "Oba! Presença confirmada! 🎉";
     document.getElementById("modalText").textContent =
       total === 1
-        ? `Que alegria, ${primeiroNome}! Te esperamos na festa da Clarice. 💙`
+        ? `Que alegria, ${primeiroNome}! Te esperamos na festa de Clarice. 💙`
         : `Que alegria! ${primeiroNome} e mais ${total - 1} acompanhante${total > 2 ? "s" : ""} confirmados! 💙🐾`;
 
     modal.hidden = false;
@@ -285,18 +285,18 @@ window.addEventListener("resize", () => {
       "BEGIN:VEVENT",
       "DTSTART:20260620T180000Z",
       "DTEND:20260620T220000Z",
-      "SUMMARY:🎂 Aniversário da Clarice",
-      "DESCRIPTION:Festa de aniversário da Clarice! Tema Bluey 🐾\\nVenha se divertir com a gente!",
+      "SUMMARY:🎂 Aniversário de Clarice",
+      "DESCRIPTION:Festa de aniversário de Clarice! Tema Bluey 🐾\\nVenha se divertir com a gente!",
       "LOCATION:Salão de Festa do Edifício Laura Caula\\, Rua Neto Campelo n°70",
       "BEGIN:VALARM",
       "TRIGGER:-P1D",
       "ACTION:DISPLAY",
-      "DESCRIPTION:Lembrete: Aniversário da Clarice amanhã! 🎉",
+      "DESCRIPTION:Lembrete: Aniversário de Clarice amanhã! 🎉",
       "END:VALARM",
       "BEGIN:VALARM",
       "TRIGGER:-PT1H",
       "ACTION:DISPLAY",
-      "DESCRIPTION:Falta 1 hora para o aniversário da Clarice! 🎂",
+      "DESCRIPTION:Falta 1 hora para o aniversário de Clarice! 🎂",
       "END:VALARM",
       "END:VEVENT",
       "END:VCALENDAR",
