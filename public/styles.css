@@ -214,18 +214,6 @@ a, button, input, select, textarea, label, [role="button"] {
   paint-order: stroke fill;
   filter: drop-shadow(0 4px 0 var(--pink-dk));
 }
-.intro-gif {
-  width: clamp(110px, 32vw, 180px);
-  height: auto;
-  display: block;
-  margin: 0 auto 10px;
-  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
-  animation: introGifFloat 2.8s ease-in-out infinite;
-}
-@keyframes introGifFloat {
-  0%,100% { transform: translateY(0);    }
-  50%      { transform: translateY(-8px); }
-}
 .intro-tap {
   color: rgba(255,255,255,.92);
   font-size: clamp(17px, 4.8vw, 24px);
