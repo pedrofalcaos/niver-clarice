@@ -1,0 +1,11 @@
+node_modules/
+.env
+npm-debug.log*
+.DS_Store
+
+# Arquivos originais na raiz (servidos de public/assets/)
+/*.gif
+/*.mp3
+
+# Claude Code
+.claude/

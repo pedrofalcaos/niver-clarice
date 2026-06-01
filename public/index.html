@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#5aa9e6" />
+  <title>Aniversário da Clarice 🐾</title>
+  <meta name="description" content="Você está convidado para o aniversário da Clarice! Confirme sua presença." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Céu animado de fundo -->
+  <div class="sky" aria-hidden="true">
+    <div class="sun"></div>
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <div class="cloud cloud--4"></div>
+    <div class="hills"></div>
+  </div>
+
+  <!-- Patinhas flutuantes -->
+  <div class="paws" id="paws" aria-hidden="true"></div>
+
+  <main class="wrap">
+
+    <!-- HERO -->
+    <section class="hero reveal">
+      <div class="banner-top">
+        <span>Você está convidado para o</span>
+      </div>
+
+      <h2 class="hero-pre">ANIVERSÁRIO DE</h2>
+      <h1 class="hero-name">
+        <span class="letter">C</span><span class="letter">L</span><span class="letter">A</span><span class="letter">R</span><span class="letter">I</span><span class="letter">C</span><span class="letter">E</span>
+      </h1>
+
+      <div class="banner-sub">
+        <span>VENHA SE DIVERTIR COM A GENTE! <span class="beat">💙</span></span>
+      </div>
+
+      <!-- Mascotes (GIFs) -->
+      <div class="mascots" id="mascots">
+        <img class="mascot-gif" src="assets/bluey 01.gif" alt="Personagem Bluey 1" />
+        <img class="mascot-gif" src="assets/bluey 02.gif" alt="Personagem Bluey 2" />
+        <img class="mascot-gif" src="assets/bluey 03.gif" alt="Personagem Bluey 3" />
+        <img class="mascot-gif" src="assets/bluey 04.gif" alt="Personagem Bluey 4" />
+      </div>
+    </section>
+
+    <!-- CONTAGEM REGRESSIVA -->
+    <section class="card countdown-card reveal">
+      <h3 class="card-title">⏳ Falta pouco para a festa!</h3>
+      <div class="countdown" id="countdown">
+        <div class="cd-box"><span class="cd-num" id="cd-d">00</span><span class="cd-lbl">dias</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-h">00</span><span class="cd-lbl">horas</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-m">00</span><span class="cd-lbl">min</span></div>
+        <div class="cd-box"><span class="cd-num" id="cd-s">00</span><span class="cd-lbl">seg</span></div>
+      </div>
+      <p class="cd-done" id="cd-done" hidden>🎉 É hoje! Bora brincar! 🎉</p>
+    </section>
+
+    <!-- DETALHES -->
+    <section class="card details-card reveal">
+      <div class="detail" style="--i:0">
+        <div class="detail-ico">📅</div>
+        <div class="detail-txt"><span class="k">DIA</span><span class="v">20/06/2026 <em>(Sábado)</em></span></div>
+      </div>
+      <div class="dash"></div>
+      <div class="detail" style="--i:1">
+        <div class="detail-ico">🕒</div>
+        <div class="detail-txt"><span class="k">HORÁRIO</span><span class="v">15h</span></div>
+      </div>
+      <div class="dash"></div>
+      <div class="detail" style="--i:2">
+        <div class="detail-ico">📍</div>
+        <div class="detail-txt">
+          <span class="k">LOCAL</span>
+          <span class="v">Salão de Festa do Edifício Laura Caula</span>
+          <a class="maps-link" id="mapsLink"
+             href="https://www.google.com/maps/search/?api=1&query=Rua%20Neto%20Campelo%2C%2070"
+             target="_blank" rel="noopener">
+            🗺️ Rua Neto Campelo, n°70 — abrir no Google Maps
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIRMAÇÃO -->
+    <section class="card rsvp-card reveal" id="rsvp">
+      <h3 class="card-title">Confirme sua presença 🎈</h3>
+      <p class="rsvp-sub">Contamos com a sua presença! Preencha seu nome abaixo.</p>
+
+      <form id="rsvpForm" autocomplete="off" novalidate>
+        <div class="field">
+          <input type="text" id="nome" name="nome" maxlength="80"
+                 placeholder=" " required />
+          <label for="nome">Seu nome</label>
+        </div>
+        <button type="submit" class="btn-confirm" id="btnConfirm">
+          <span class="btn-txt">Eu vou! 🐾</span>
+        </button>
+        <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+
+      <p class="counter" id="counter">Carregando confirmações…</p>
+    </section>
+
+    <div class="banner-foot reveal">
+      <span>CONTAMOS COM A SUA PRESENÇA! <span class="beat">💙</span></span>
+    </div>
+
+    <footer class="foot">
+      <a href="/admin.html" class="admin-link">Painel da família 🔒</a>
+    </footer>
+  </main>
+
+  <!-- Camada de confete -->
+  <canvas id="confetti" class="confetti" aria-hidden="true"></canvas>
+
+  <!-- Modal de sucesso -->
+  <div class="modal" id="modal" hidden>
+    <div class="modal-box pop">
+      <div class="modal-paw">🐾</div>
+      <h3 id="modalTitle">Oba! Presença confirmada! 🎉</h3>
+      <p id="modalText">Que alegria, te esperamos na festa da Clarice!</p>
+      <button class="btn-confirm" id="modalClose"><span class="btn-txt">Fechar</span></button>
+    </div>
+  </div>
+
+  <!-- Música de fundo (tema Bluey) -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/bluey-tema.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Botão flutuante de música -->
+  <button class="music-btn" id="musicBtn" title="Tocar música" aria-label="Tocar música">♪</button>
+
+  <script src="script.js"></script>
+</body>
+</html>

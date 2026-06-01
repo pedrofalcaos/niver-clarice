@@ -1,0 +1,19 @@
+COLOQUE SUAS IMAGENS DE REFERÊNCIA AQUI
+=======================================
+
+Solte nesta pasta (public/assets/) as imagens da festa, por exemplo:
+  - bluey.png      (personagem Bluey)
+  - bingo.png      (personagem Bingo)
+  - convite.png    (o convite que você já tem)
+
+Como usar no site:
+1) Abra o arquivo  public/index.html
+2) Localize o bloco  <div class="mascots" id="mascots"> ... </div>
+3) Substitua os "cachorrinhos" desenhados em CSS por suas imagens:
+
+   <div class="mascots" id="mascots">
+     <img class="mascot-img" src="assets/bluey.png" alt="Bluey" />
+     <img class="mascot-img" src="assets/bingo.png" alt="Bingo" />
+   </div>
+
+A classe .mascot-img já tem a animação de balanço e tamanho responsivo.
