@@ -217,6 +217,58 @@ window.addEventListener("resize", () => {
   }
 });
 
+/* ---------- Lembrete no calendário ---------- */
+(function setupLembrete() {
+  const btn = document.getElementById("reminderBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    // 20/06/2026 às 15h (Brasília = UTC-3) → 18h UTC
+    const ics = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Aniversario Clarice//PT-BR",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      "BEGIN:VEVENT",
+      "DTSTART:20260620T180000Z",
+      "DTEND:20260620T220000Z",
+      "SUMMARY:🎂 Aniversário da Clarice",
+      "DESCRIPTION:Festa de aniversário da Clarice! Tema Bluey 🐾\\nVenha se divertir com a gente!",
+      "LOCATION:Salão de Festa do Edifício Laura Caula\\, Rua Neto Campelo n°70",
+      "BEGIN:VALARM",
+      "TRIGGER:-P1D",
+      "ACTION:DISPLAY",
+      "DESCRIPTION:Lembrete: Aniversário da Clarice amanhã! 🎉",
+      "END:VALARM",
+      "BEGIN:VALARM",
+      "TRIGGER:-PT1H",
+      "ACTION:DISPLAY",
+      "DESCRIPTION:Falta 1 hora para o aniversário da Clarice! 🎂",
+      "END:VALARM",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].join("\r\n");
+
+    const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement("a");
+    a.href     = url;
+    a.download = "niver-clarice.ics";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    btn.textContent = "✅ Lembrete criado!";
+    btn.classList.add("ok");
+    setTimeout(() => {
+      btn.textContent = "📅 Salvar lembrete no celular";
+      btn.classList.remove("ok");
+    }, 3000);
+  });
+})();
+
 /* ---------- Música de fundo ---------- */
 (function setupMusic() {
   const audio = document.getElementById("bgMusic");

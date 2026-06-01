@@ -231,13 +231,33 @@ a, button, input, select, textarea, label, [role="button"] {
 .detail-txt .v em { color: var(--ink); font-style: normal; font-weight: 500; }
 .dash { height: 0; border-top: 2px dashed #f0c6d4; margin: 2px 0; }
 .maps-link {
-  margin-top: 4px; display: inline-block; color: #fff; background: var(--bluey);
+  margin-top: 6px; display: block; color: #fff; background: var(--bluey);
   text-decoration: none; font-weight: 600; font-size: 14px;
-  padding: 8px 14px; border-radius: 12px; box-shadow: 0 4px 0 var(--bluey-dk);
-  transition: transform .15s, box-shadow .15s;
+  padding: 10px 14px; border-radius: 12px; box-shadow: 0 4px 0 var(--bluey-dk);
+  transition: transform .15s, box-shadow .15s; text-align: center;
 }
-.maps-link:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--bluey-dk); }
-.maps-link:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--bluey-dk); }
+.maps-link:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--bluey-dk); }
+.maps-link:active { transform: translateY(2px);  box-shadow: 0 2px 0 var(--bluey-dk); }
+
+.reminder-btn {
+  margin-top: 8px;
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, var(--pink), var(--pink-dk));
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-family: "Fredoka", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  text-align: center;
+  box-shadow: 0 4px 0 var(--pink-dk);
+  transition: transform .12s, box-shadow .12s;
+}
+.reminder-btn:hover  { transform: translateY(-2px); box-shadow: 0 6px 0 var(--pink-dk); }
+.reminder-btn:active { transform: translateY(2px);  box-shadow: 0 2px 0 var(--pink-dk); }
+.reminder-btn.ok { background: linear-gradient(180deg,#6cbf6a,#4da84b); box-shadow: 0 4px 0 #3a8a38; }
 
 /* ---------- RSVP ---------- */
 .rsvp-sub { text-align: center; margin: -6px 0 18px; color: var(--ink); opacity: .8; }
