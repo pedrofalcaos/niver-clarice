@@ -14,29 +14,36 @@ app.use(express.static(path.join(__dirname, "public")));
 // Limite simples de tamanho de nome para evitar abusos.
 const MAX_NOME = 80;
 
-// ---- API publica: registrar confirmacao -----------------------------------
+// ---- API publica: registrar confirmacao (aceita nome ou array nomes) ------
 app.post("/api/confirmar", async (req, res) => {
   try {
-    let nome = (req.body && req.body.nome ? String(req.body.nome) : "").trim();
-
-    if (!nome) {
-      return res.status(400).json({ ok: false, erro: "Informe o seu nome." });
+    // Suporta { nomes: [...] } (grupo) ou { nome: "..." } (legado)
+    let nomes = [];
+    if (Array.isArray(req.body?.nomes)) {
+      nomes = req.body.nomes.map((n) => String(n).trim()).filter(Boolean);
+    } else if (req.body?.nome) {
+      nomes = [String(req.body.nome).trim()];
     }
-    if (nome.length > MAX_NOME) {
-      nome = nome.slice(0, MAX_NOME);
+
+    if (nomes.length === 0) {
+      return res.status(400).json({ ok: false, erro: "Informe pelo menos um nome." });
     }
 
-    const { rows } = await pool.query(
-      "INSERT INTO confirmacoes (nome) VALUES ($1) RETURNING id, nome, criado_em",
-      [nome]
-    );
+    nomes = nomes.map((n) => n.slice(0, MAX_NOME));
 
-    return res.status(201).json({ ok: true, confirmacao: rows[0] });
+    const inseridos = [];
+    for (const nome of nomes) {
+      const { rows } = await pool.query(
+        "INSERT INTO confirmacoes (nome) VALUES ($1) RETURNING id, nome, criado_em",
+        [nome]
+      );
+      inseridos.push(rows[0]);
+    }
+
+    return res.status(201).json({ ok: true, confirmacoes: inseridos, total: inseridos.length });
   } catch (err) {
     console.error("[api] Erro ao confirmar:", err.message);
-    return res
-      .status(500)
-      .json({ ok: false, erro: "Nao foi possivel registrar. Tente de novo." });
+    return res.status(500).json({ ok: false, erro: "Nao foi possivel registrar. Tente de novo." });
   }
 });
 

@@ -160,15 +160,55 @@ modal?.addEventListener("click", (e) => {
   if (e.target === modal) modal.hidden = true;
 });
 
+/* ---------- Acompanhantes ---------- */
+(function setupCompanions() {
+  const btnAdd   = document.getElementById("btnAddComp");
+  const container = document.getElementById("companions");
+  if (!btnAdd || !container) return;
+
+  const MAX = 8;
+  let count = 0;
+
+  btnAdd.addEventListener("click", () => {
+    if (count >= MAX) return;
+    count++;
+
+    const uid = `comp-${count}`;
+    const row = document.createElement("div");
+    row.className = "comp-row";
+    row.innerHTML = `
+      <div class="field">
+        <input type="text" id="${uid}" maxlength="80" placeholder=" " />
+        <label for="${uid}">Nome do acompanhante</label>
+      </div>
+      <button type="button" class="btn-rm-comp" aria-label="Remover">×</button>`;
+
+    row.querySelector(".btn-rm-comp").addEventListener("click", () => {
+      row.remove();
+      count--;
+      btnAdd.disabled = false;
+      btnAdd.textContent = "🐾 Adicionar acompanhante";
+    });
+
+    container.appendChild(row);
+    row.querySelector("input").focus();
+
+    if (count >= MAX) {
+      btnAdd.disabled = true;
+      btnAdd.textContent = "Máximo de acompanhantes atingido";
+    }
+  });
+})();
+
 /* ---------- Envio do formulário ---------- */
 const form = document.getElementById("rsvpForm");
-const msg = document.getElementById("formMsg");
-const btn = document.getElementById("btnConfirm");
+const msg  = document.getElementById("formMsg");
+const btn  = document.getElementById("btnConfirm");
 
 form?.addEventListener("submit", async (e) => {
   e.preventDefault();
   const nome = document.getElementById("nome").value.trim();
-  msg.className = "form-msg";
+  msg.className  = "form-msg";
   msg.textContent = "";
 
   if (!nome) {
@@ -177,6 +217,13 @@ form?.addEventListener("submit", async (e) => {
     return;
   }
 
+  // Coleta acompanhantes preenchidos
+  const extras = Array.from(
+    document.querySelectorAll("#companions input")
+  ).map((el) => el.value.trim()).filter(Boolean);
+
+  const nomes = [nome, ...extras];
+
   btn.disabled = true;
   btn.classList.add("loading");
 
@@ -184,19 +231,24 @@ form?.addEventListener("submit", async (e) => {
     const r = await fetch("/api/confirmar", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nome }),
+      body: JSON.stringify({ nomes }),
     });
     const data = await r.json();
 
-    if (!r.ok || !data.ok) {
-      throw new Error(data.erro || "Erro ao confirmar.");
-    }
+    if (!r.ok || !data.ok) throw new Error(data.erro || "Erro ao confirmar.");
 
     form.reset();
+    document.getElementById("companions").innerHTML = "";
+
+    const primeiroNome = nome.split(" ")[0];
+    const total = nomes.length;
     dispararConfete();
     document.getElementById("modalTitle").textContent = "Oba! Presença confirmada! 🎉";
     document.getElementById("modalText").textContent =
-      `Que alegria, ${nome.split(" ")[0]}! Te esperamos na festa da Clarice. 💙`;
+      total === 1
+        ? `Que alegria, ${primeiroNome}! Te esperamos na festa da Clarice. 💙`
+        : `Que alegria! ${primeiroNome} e mais ${total - 1} acompanhante${total > 2 ? "s" : ""} confirmados! 💙🐾`;
+
     modal.hidden = false;
     carregarContagem();
   } catch (err) {

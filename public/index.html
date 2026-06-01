@@ -98,13 +98,25 @@
       <p class="rsvp-sub">Contamos com a sua presença! Preencha seu nome abaixo.</p>
 
       <form id="rsvpForm" autocomplete="off" novalidate>
+        <p class="rsvp-quem">Quem vai? 👇</p>
+
+        <!-- Campo principal -->
         <div class="field">
           <input type="text" id="nome" name="nome" maxlength="80"
                  placeholder=" " required />
           <label for="nome">Seu nome</label>
         </div>
+
+        <!-- Acompanhantes adicionados dinamicamente -->
+        <div id="companions"></div>
+
+        <!-- Botão adicionar acompanhante -->
+        <button type="button" class="btn-add-comp" id="btnAddComp">
+          🐾 Adicionar acompanhante
+        </button>
+
         <button type="submit" class="btn-confirm" id="btnConfirm">
-          <span class="btn-txt">Eu vou! 🐾</span>
+          <span class="btn-txt">Eu vou! 🎉</span>
         </button>
         <p class="form-msg" id="formMsg" role="status" aria-live="polite"></p>
       </form>
