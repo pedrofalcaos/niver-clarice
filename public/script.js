@@ -367,7 +367,26 @@ window.addEventListener("resize", () => {
     if (e && e.cancelable) e.preventDefault();
     overlay.classList.add("saindo");
     setTimeout(() => overlay.remove(), 600);
-    if (typeof window._startMusic === "function") window._startMusic();
+
+    // Usa o gesto do toque para tocar o vídeo COM SOM
+    const vid = document.getElementById("recadoVideo");
+    if (vid) {
+      vid.muted  = false;
+      vid.loop   = false;          // toca uma vez só
+      vid.volume = 1;
+      vid.currentTime = 0;
+      vid.play().catch(() => {
+        // Se o browser bloquear mesmo assim, cai na música
+        if (typeof window._startMusic === "function") window._startMusic();
+      });
+      // Quando o vídeo terminar → inicia a música do Bluey
+      vid.addEventListener("ended", () => {
+        vid.muted = true;          // silencia para não repetir ao rolar
+        if (typeof window._startMusic === "function") window._startMusic();
+      }, { once: true });
+    } else {
+      if (typeof window._startMusic === "function") window._startMusic();
+    }
   }
 
   overlay.addEventListener("click",      entrar);
