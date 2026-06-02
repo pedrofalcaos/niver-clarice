@@ -167,64 +167,78 @@ a, button, input, select, textarea, label, [role="button"] {
   position: fixed;
   inset: 0;
   z-index: 300;
-  background: linear-gradient(160deg, #7bc4f2 0%, #5aa9e6 45%, #1f3d7a 100%);
+  overflow: hidden;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   cursor: pointer;
-  transition: opacity .55s ease, transform .55s ease;
+  transition: opacity .6s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+  background: #000;
 }
 .intro-overlay.saindo {
   opacity: 0;
-  transform: scale(1.05);
   pointer-events: none;
 }
+
+/* Vídeo cobre a tela toda */
+.intro-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+/* Véu gradiente na base para o texto ser legível */
+.intro-veil {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 38%;
+  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Conteúdo sobreposto */
 .intro-inner {
+  position: relative;
+  z-index: 2;
   text-align: center;
-  padding: 24px;
+  padding: 0 24px 36px;
+  width: 100%;
   animation: introEntrada .7s cubic-bezier(.34,1.56,.64,1);
 }
 @keyframes introEntrada {
-  from { opacity: 0; transform: translateY(40px) scale(.9); }
+  from { opacity: 0; transform: translateY(20px); }
 }
+
 .intro-paw {
-  font-size: 80px;
+  font-size: 48px;
   display: block;
-  margin-bottom: 18px;
+  margin-bottom: 10px;
   animation: introPaw 1.5s ease-in-out infinite;
 }
 @keyframes introPaw {
   0%,100% { transform: scale(1)    rotate(-8deg); }
   50%      { transform: scale(1.18) rotate(8deg);  }
 }
-.intro-title {
-  font-family: "Baloo 2", sans-serif;
-  font-weight: 800;
-  font-size: clamp(42px, 14vw, 86px);
-  color: #fff;
-  margin: 0 0 10px;
-  line-height: 1.05;
-  text-shadow: 0 4px 20px rgba(0,0,0,0.18);
-}
-.intro-title span {
-  color: var(--pink);
-  -webkit-text-stroke: 3px var(--pink-dk);
-  paint-order: stroke fill;
-  filter: drop-shadow(0 4px 0 var(--pink-dk));
-}
+
 .intro-tap {
-  color: rgba(255,255,255,.92);
-  font-size: clamp(17px, 4.8vw, 24px);
-  font-weight: 600;
-  margin: 14px 0 0;
-  letter-spacing: .3px;
+  color: #fff;
+  font-size: clamp(16px, 4.5vw, 22px);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: .4px;
+  text-shadow: 0 2px 8px rgba(0,0,0,.5);
   animation: tapPulse 1.5s ease-in-out infinite;
 }
 @keyframes tapPulse {
-  0%,100% { opacity: .88; transform: scale(1);    }
-  50%      { opacity: 1;   transform: scale(1.06); }
+  0%,100% { opacity: .85; transform: scale(1);    }
+  50%      { opacity: 1;   transform: scale(1.07); }
 }
 
 /* ---------- BOTÃO DE MÚSICA ---------- */

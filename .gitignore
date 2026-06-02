@@ -6,6 +6,7 @@ npm-debug.log*
 # Arquivos originais na raiz (servidos de public/assets/)
 /*.gif
 /*.mp3
+/*.mp4
 
 # Claude Code
 .claude/
