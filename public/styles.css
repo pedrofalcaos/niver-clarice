@@ -167,76 +167,42 @@ a, button, input, select, textarea, label, [role="button"] {
   position: fixed;
   inset: 0;
   z-index: 300;
-  overflow: hidden;
+  background: linear-gradient(160deg, #7bc4f2 0%, #5aa9e6 45%, #1f3d7a 100%);
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: opacity .6s ease;
+  transition: opacity .55s ease, transform .55s ease;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
-  background: #000;
 }
-.intro-overlay.saindo {
-  opacity: 0;
-  pointer-events: none;
-}
+.intro-overlay.saindo { opacity: 0; transform: scale(1.04); pointer-events: none; }
 
-/* Vídeo cobre a tela toda */
-.intro-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
-}
-
-/* Véu gradiente na base para o texto ser legível */
-.intro-veil {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 38%;
-  background: linear-gradient(to top, rgba(0,0,0,.65) 0%, transparent 100%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Tela inicial (paw + título + tap) */
 .intro-inner {
-  position: relative;
-  z-index: 2;
   text-align: center;
-  padding: 0 24px 44px;
-  width: 100%;
-  transition: opacity .4s ease;
+  padding: 24px;
   animation: introEntrada .7s cubic-bezier(.34,1.56,.64,1);
 }
-.intro-inner.oculto { opacity: 0; pointer-events: none; }
-@keyframes introEntrada {
-  from { opacity: 0; transform: translateY(20px); }
-}
+@keyframes introEntrada { from { opacity: 0; transform: translateY(30px) scale(.95); } }
 
 .intro-paw {
-  font-size: 56px;
+  font-size: 72px;
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   animation: introPaw 1.5s ease-in-out infinite;
 }
 @keyframes introPaw {
   0%,100% { transform: scale(1)    rotate(-8deg); }
   50%      { transform: scale(1.18) rotate(8deg);  }
 }
-
 .intro-title {
   font-family: "Baloo 2", sans-serif;
   font-weight: 800;
-  font-size: clamp(38px, 12vw, 78px);
+  font-size: clamp(40px, 13vw, 80px);
   color: #fff;
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   line-height: 1.05;
-  text-shadow: 0 4px 20px rgba(0,0,0,.3);
+  text-shadow: 0 4px 20px rgba(0,0,0,.18);
 }
 .intro-title span {
   color: var(--pink);
@@ -244,14 +210,12 @@ a, button, input, select, textarea, label, [role="button"] {
   paint-order: stroke fill;
   filter: drop-shadow(0 3px 0 var(--pink-dk));
 }
-
 .intro-tap {
-  color: #fff;
-  font-size: clamp(16px, 4.5vw, 22px);
-  font-weight: 700;
-  margin: 8px 0 0;
-  letter-spacing: .4px;
-  text-shadow: 0 2px 8px rgba(0,0,0,.5);
+  color: rgba(255,255,255,.92);
+  font-size: clamp(17px, 4.8vw, 24px);
+  font-weight: 600;
+  margin: 14px 0 0;
+  letter-spacing: .3px;
   animation: tapPulse 1.5s ease-in-out infinite;
 }
 @keyframes tapPulse {
@@ -259,21 +223,48 @@ a, button, input, select, textarea, label, [role="button"] {
   50%      { opacity: 1;   transform: scale(1.07); }
 }
 
-/* Dica "pular" — aparece durante o vídeo */
-.intro-skip {
-  position: absolute;
-  bottom: 22px;
-  right: 22px;
-  z-index: 2;
-  color: rgba(255,255,255,.7);
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: .3px;
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
-  display: none;
-  animation: tapPulse 1.8s ease-in-out infinite;
+/* ---------- VÍDEO DA FESTA ---------- */
+.festa-video {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  display: block;
+  background: #000;
+  box-shadow: var(--shadow);
 }
-.intro-skip.visivel { display: block; }
+
+/* ---------- MURAL DE FOTOS ---------- */
+.galeria-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 28px 16px;
+  border: 3px dashed var(--bluey);
+  border-radius: 18px;
+  background: rgba(90,169,230,.06);
+  text-align: center;
+}
+.galeria-emoji {
+  font-size: 52px;
+  animation: bob 3s ease-in-out infinite;
+}
+.galeria-msg {
+  margin: 0;
+  font-size: clamp(15px, 4vw, 18px);
+  font-weight: 600;
+  color: var(--bluey-dk);
+  line-height: 1.5;
+}
+.galeria-tag {
+  background: var(--bluey);
+  color: #fff;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  letter-spacing: .3px;
+}
 
 /* ---------- BOTÃO DE MÚSICA ---------- */
 .music-btn {

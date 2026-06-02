@@ -12,21 +12,13 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Tela de entrada (resolve autoplay do navegador) -->
-  <div class="intro-overlay" id="introOverlay" tabindex="0" aria-label="Entrar na festa">
-    <!-- Vídeo (sem autoplay — toca com som após o 1º toque) -->
-    <video class="intro-video" id="introVideo" playsinline preload="auto">
-      <source src="assets/clarice-intro.mp4" type="video/mp4">
-    </video>
-    <div class="intro-veil"></div>
-    <!-- Tela inicial (antes do vídeo tocar) -->
-    <div class="intro-inner" id="introStart">
+  <!-- Tela de entrada -->
+  <div class="intro-overlay" id="introOverlay" role="button" tabindex="0" aria-label="Entrar na festa">
+    <div class="intro-inner">
       <div class="intro-paw">🐾</div>
       <h2 class="intro-title">Clarice faz<br><span>3 anos!</span></h2>
       <p class="intro-tap">✨ Toque para entrar ✨</p>
     </div>
-    <!-- Dica de pular (aparece depois que o vídeo começa) -->
-    <p class="intro-skip" id="introSkip">Toque para pular ›</p>
   </div>
 
   <!-- Céu animado de fundo -->
@@ -153,6 +145,24 @@
     <div class="banner-foot reveal">
       <span>CONTAMOS COM A SUA PRESENÇA! <span class="beat">💙</span></span>
     </div>
+
+    <!-- VÍDEO DA FESTA -->
+    <section class="card video-card reveal">
+      <h3 class="card-title">🎬 Vídeo especial</h3>
+      <video class="festa-video" controls playsinline preload="metadata">
+        <source src="assets/clarice-intro.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <!-- MURAL DE FOTOS -->
+    <section class="card galeria-card reveal" id="galeria">
+      <h3 class="card-title">📷 Mural de Fotos</h3>
+      <div class="galeria-placeholder">
+        <div class="galeria-emoji">📸</div>
+        <p class="galeria-msg">As fotos da festa serão<br>publicadas aqui após o evento!</p>
+        <span class="galeria-tag">🐾 Festa: 20/06/2026</span>
+      </div>
+    </section>
 
     <footer class="foot">
       <a href="/admin.html" class="admin-link">Painel da família 🔒</a>

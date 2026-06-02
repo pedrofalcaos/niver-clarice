@@ -360,58 +360,19 @@ window.addEventListener("resize", () => {
 
 /* ---------- Tela de entrada ---------- */
 (function setupIntro() {
-  const overlay   = document.getElementById("introOverlay");
-  const video     = document.getElementById("introVideo");
-  const startEl   = document.getElementById("introStart");
-  const skipEl    = document.getElementById("introSkip");
+  const overlay = document.getElementById("introOverlay");
   if (!overlay) return;
 
-  let fase = "espera"; // "espera" | "video" | "saindo"
-
-  function entrarNoSite() {
-    if (fase === "saindo") return;
-    fase = "saindo";
+  function entrar(e) {
+    if (e && e.cancelable) e.preventDefault();
     overlay.classList.add("saindo");
-    if (video) video.pause();
     setTimeout(() => overlay.remove(), 600);
     if (typeof window._startMusic === "function") window._startMusic();
   }
 
-  function tocarVideo() {
-    if (fase !== "espera") return;
-    fase = "video";
-
-    // Esconde a tela inicial
-    if (startEl) startEl.classList.add("oculto");
-
-    // Toca o vídeo COM SOM (possível porque há gesto do utilizador)
-    if (video) {
-      video.muted  = false;
-      video.volume = 1;
-      video.play().catch(() => entrarNoSite()); // fallback se falhar
-
-      // Quando o vídeo terminar → entra no site
-      video.addEventListener("ended", entrarNoSite, { once: true });
-    } else {
-      entrarNoSite();
-      return;
-    }
-
-    // Mostra o "Toque para pular" após 1,5 s
-    setTimeout(() => {
-      if (skipEl && fase === "video") skipEl.classList.add("visivel");
-    }, 1500);
-  }
-
-  function handleToque(e) {
-    if (e && e.cancelable) e.preventDefault();
-    if (fase === "espera")  tocarVideo();
-    else if (fase === "video") entrarNoSite();
-  }
-
-  overlay.addEventListener("click",      handleToque);
-  overlay.addEventListener("touchstart", handleToque, { passive: false });
+  overlay.addEventListener("click",      entrar);
+  overlay.addEventListener("touchstart", entrar, { passive: false });
   overlay.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") handleToque(e);
+    if (e.key === "Enter" || e.key === " ") entrar(e);
   });
 })();
